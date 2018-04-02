@@ -211,17 +211,7 @@ void GazeboInterface::cleanupHook()
 
 GazeboInterface::~GazeboInterface()
 {
-   if(!gazebo::shutdown()){
-      
-      RTT::log(RTT::Info) << "Stoping Simulation." << RTT::endlog();
-      
-      gazebo::event::Events::sigInt.Signal();
-      
-      loaded_world->Fini();
-      
-      RTT::log(RTT::Info) << "Shutting down Gazebo" << RTT::endlog();
-      
-      gazebo::shutdown();
-   }
+   if(!gazebo::shutdown())
+      cleanupHook(); 
 }
    
